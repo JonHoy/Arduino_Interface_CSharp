@@ -179,8 +179,6 @@ namespace ArduinoClass
                 Angle = NewAngle;
                 myArduino.ServoWrite(Digital_Pin, Angle);                
             }
-
-
         }
         
         public void Detach()
