@@ -115,6 +115,14 @@ namespace ArduinoClass
             CheckInputs(value, 180, 0);
             SendCommand(new int[] { 56, 97 + pin, value});
         }
+
+        // read value of servo motor
+        public void ServoRead(int pin, int value)
+        {
+            CheckInputs(value, 180, 0);
+            SendCommand(new int[] { 55, 97 + pin, value });
+        }
+
         // set speed of dc motor
         public void MotorSpeed(int num, int value)
         {

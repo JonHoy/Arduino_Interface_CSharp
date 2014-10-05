@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ArduinoClass;
+using System.IO.Ports;
+
 namespace Arduino_AnalogRead
 {
     public partial class Form1 : Form
@@ -16,7 +18,19 @@ namespace Arduino_AnalogRead
         public Form1()
         {
             InitializeComponent();
-            this.myArduino = new Arduino("COM4");   
+            string[] Ports = SerialPort.GetPortNames();
+            foreach (var port in Ports)
+            {
+                try
+                {
+                    this.myArduino = new Arduino(port); 
+                    break;
+                }
+                catch (Exception)
+                {
+                }
+            }
+              
         }
 
         private void button3_Click(object sender, EventArgs e)
