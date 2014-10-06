@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ArduinoClass
 {
-    class Sensor
+    public class Sensor
     {
         private Arduino myArduino; // the arduino that is hooked up to the sensor
         private int analogPin; // the analog pin number that the sensor is using

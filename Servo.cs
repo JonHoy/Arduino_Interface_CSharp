@@ -7,7 +7,7 @@ using ArduinoClass;
 
 namespace ArduinoClass
 {
-    class Servo
+    public class Servo
     {
         public Arduino myArduino;
 
@@ -51,17 +51,6 @@ namespace ArduinoClass
         public void Attach()
         {
             myArduino.ServoAttach(Digital_Pin);
-        }
-
-        ~Servo()
-        {
-            try
-            {
-                Detach();
-            }
-            catch
-            {
-            }
         }
     }
 
