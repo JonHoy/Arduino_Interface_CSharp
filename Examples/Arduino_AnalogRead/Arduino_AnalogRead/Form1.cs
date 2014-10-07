@@ -15,7 +15,8 @@ namespace Arduino_AnalogRead
     public partial class Form1 : Form
     {
         public Arduino myArduino;
-        public Form1()
+        public Sensor mySensor;
+        public Form1()   
         {
             InitializeComponent();
             string[] Ports = SerialPort.GetPortNames();
@@ -30,6 +31,7 @@ namespace Arduino_AnalogRead
                 {
                 }
             }
+            mySensor = new Sensor(myArduino, 0);
               
         }
 
@@ -46,7 +48,7 @@ namespace Arduino_AnalogRead
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 1; i++)
             {
                 string PinNumber = "Analog " + i.ToString();
                 this.chart1.Series.Add(PinNumber);
@@ -60,11 +62,12 @@ namespace Arduino_AnalogRead
         private void timer1_Tick(object sender, EventArgs e)
         {
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 1; i++)
             {
-                ushort Val = myArduino.AnalogRead(i);
                 string PinNumber = "Analog " + i.ToString();
-                this.chart1.Series[PinNumber].Points.AddY((double)Val);
+                var Val = mySensor.getSensorReading();
+                var Dist = Math.Min(12 / Val, 40);
+                this.chart1.Series[PinNumber].Points.AddY((double)Dist);
             }
         }
     }

@@ -10,13 +10,13 @@ namespace ArduinoClass
     public class Sensor
     {
         private Arduino myArduino; // the arduino that is hooked up to the sensor
-        private int analogPin; // the analog pin number that the sensor is using
-        private double bitCount = 10; // A/D resolution of the arduino
-        private double minVoltage = 0;
-        private double maxVoltage = 5;
+        public int analogPin {get; private set;} // the analog pin number that the sensor is using
+        protected double bitCount = 10; // A/D resolution of the arduino
+        protected double minVoltage = 0;
+        protected double maxVoltage = 5;
 
 
-        public Sensor(ref Arduino Board, int Pin)
+        public Sensor(Arduino Board, int Pin)
         {
             this.myArduino = Board;
             this.analogPin = Pin;
