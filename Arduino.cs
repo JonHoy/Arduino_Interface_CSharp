@@ -10,7 +10,9 @@ namespace ArduinoClass
     public class Arduino
     {
         private int WAIT_TIME = 1; //  (12 sec = default) amount of time (sec) required to wait before issuing commands after opening Serial port
+        private int PinMax = 100; // define maximum value for a digital pin 
         private SerialPort Serial; // Serial port object which controls read/write operations
+        private bool[] servoStatus; // connection status of each servo
 
         public Arduino(string COM) // eg COM = "COM4"
         { 
@@ -52,10 +54,17 @@ namespace ArduinoClass
                 throw new Exception("Unable to Connect to the Arduino Exiting Now!");
             }
             Console.WriteLine("Arduino Sucessfully Connected!");
+            servoStatus = new bool[PinMax];
         }
 
         ~Arduino() // destructor
         {
+            // detach servos
+            for (int i = 0; i < PinMax; i++)
+            {
+                if (servoStatus[i]) // if connected, detach it
+                    ServoDetach(i);
+            }
             Serial.Close(); // close the Serial connection
         }
         public void PinMode(int pin, bool mode)
@@ -95,11 +104,13 @@ namespace ArduinoClass
         public void ServoAttach(int pin)
         {
             SendCommand(new int[] { 54, 97 + pin, 49 });
+            servoStatus[pin] = true;
         }
         // send command to detach servo to the pin
         public void ServoDetach(int pin)
         {
             SendCommand(new int[] { 54, 97 + pin, 48 });
+            servoStatus[pin] = false;
         }
         // determine if servo is attached or detached for the pin
         public bool ServoStatus(int pin)
