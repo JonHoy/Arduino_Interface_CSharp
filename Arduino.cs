@@ -57,7 +57,7 @@ namespace ArduinoClass
             servoStatus = new bool[PinMax];
         }
 
-        ~Arduino() // destructor
+        public void Disconnect() // destructor
         {
             // detach servos
             for (int i = 0; i < PinMax; i++)

@@ -23,7 +23,7 @@ namespace ArduinoClass
             this.Digital_Pin = Digital_Pin;
             this.myArduino.ServoAttach(Digital_Pin);
             this.MaxAngle = MaxAngle;
-            this.MinAngle = 0;
+            this.MinAngle = MinAngle;
         }
 
         public void DigitalPinChange(int NewPin)
