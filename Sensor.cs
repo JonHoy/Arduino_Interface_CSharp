@@ -16,7 +16,7 @@ namespace ArduinoClass
         protected double maxVoltage = 5;
 
 
-        public Sensor(ref Arduino Board, int Pin)
+        public Sensor(Arduino Board, int Pin)
         {
             this.myArduino = Board;
             this.analogPin = Pin;
