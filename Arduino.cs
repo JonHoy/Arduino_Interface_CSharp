@@ -12,7 +12,7 @@ namespace ArduinoClass
     public class Arduino : IDisposable
     {
         private int WAIT_TIME = 1; //  (12 sec = default) amount of time (sec) required to wait before issuing commands after opening Serial port
-        private int PinMax = 100; // define maximum value for a digital pin 
+        private int PinMax = 69; // define maximum value for a digital pin 
         private SerialPort Serial; // Serial port object which controls read/write operations
         private bool[] servoStatus; // connection status of each servo
         private bool disposed = false; // Flag: Has Dispose already been called? 
@@ -50,18 +50,19 @@ namespace ArduinoClass
             try 
 	        {
                 Serial = new SerialPort(COM, 115200);
+                Serial.Encoding = new UTF8Encoding();
+                Serial.ReadTimeout = 500;
+
+                Serial.Open();
+                Thread.Sleep(1000 * WAIT_TIME);
+                // Send command to the arduino, wait for a response
+                Serial.Write("99");
 	        }
 	        catch (Exception)
 	        {
                 throw new Exception("Unable to Connect to Arduino");
 	        }
-            Serial.Encoding = new UTF8Encoding();
-            Serial.ReadTimeout = 500;
 
-            Serial.Open();
-            Thread.Sleep(1000 * WAIT_TIME);
-            // Send command to the arduino, wait for a response
-            Serial.Write("99");
             try
             {
                 string Check = Serial.ReadLine(); // try to get a response from the arduino board
