@@ -7,14 +7,45 @@ using System.IO.Ports;
 
 namespace ArduinoClass
 {
-    public class Arduino
+    // INSPIRED BY: MATLAB® Support Package for Arduino® Hardware
+    
+    public class Arduino : IDisposable
     {
         private int WAIT_TIME = 1; //  (12 sec = default) amount of time (sec) required to wait before issuing commands after opening Serial port
         private int PinMax = 100; // define maximum value for a digital pin 
         private SerialPort Serial; // Serial port object which controls read/write operations
         private bool[] servoStatus; // connection status of each servo
+        private bool disposed = false; // Flag: Has Dispose already been called? 
 
-        public Arduino(string COM) // eg COM = "COM4"
+        // code to auto detect arduino
+        public Arduino() {
+            string[] ports = SerialPort.GetPortNames();
+            bool Connected = false; 
+            for (int i = 0; i < ports.Length; i++)
+            {
+                try
+                {
+                    Arduino_Initialize(ports[i]);
+                    Connected = true;
+                    break;
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
+            if (Connected == false)
+	        {
+                throw new Exception("Unable to connect to any of the COM Ports");
+	        }
+
+        }
+
+        public Arduino(string COM) {
+            Arduino_Initialize(COM);
+        }
+        
+        private void Arduino_Initialize(string COM) // eg COM = "COM4"
         { 
             try 
 	        {
@@ -26,23 +57,10 @@ namespace ArduinoClass
 	        }
             Serial.Encoding = new UTF8Encoding();
             Serial.ReadTimeout = 500;
-            try
-            {
-                Serial.Open();
-            }
-            catch (Exception)
-            { 
-                Console.WriteLine("Unable to Open {0}",COM);
-                throw;  
-            }
-            Console.Write("Attemping Connection .");
-            for (int i = 0; i < WAIT_TIME; i++) // make the user wait before trying to establish communication
-            {
-                Thread.Sleep(1000); // wait for 1 second then continue iterations
-                Console.Write(".");
-            }
-            Console.Write("\n");
-            // Query Script Type
+
+            Serial.Open();
+            Thread.Sleep(1000 * WAIT_TIME);
+            // Send command to the arduino, wait for a response
             Serial.Write("99");
             try
             {
@@ -50,10 +68,8 @@ namespace ArduinoClass
             }
             catch (Exception)
             {
-                Console.WriteLine("Connection Unsuccessful!");
-                throw new Exception("Unable to Connect to the Arduino Exiting Now!");
+                throw new Exception("Unable to Connect to the Arduino at " + COM);
             }
-            Console.WriteLine("Arduino Sucessfully Connected!");
             servoStatus = new bool[PinMax];
         }
 
@@ -67,6 +83,23 @@ namespace ArduinoClass
             }
             Serial.Close(); // close the Serial connection
         }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+                Disconnect(); // disconnect the arduino before being disposed by the GC
+
+            disposed = true;
+        }
+
         public void PinMode(int pin, bool mode)
         {
             SendCommand(new int[] { 48, 97 + pin, 48 + Convert.ToInt32(mode) });
@@ -81,11 +114,11 @@ namespace ArduinoClass
             return pinNumber;
         }
         // read the analog pin from the arduino board
-        public UInt16 AnalogRead(int pin)
+        public double AnalogRead(int pin)
         {
             SendCommand(new int[] { 51, 97 + pin });
             string val = Serial.ReadLine();
-            UInt16 AnalogValue = UInt16.Parse(val);
+            double AnalogValue = double.Parse(val);
             return AnalogValue;
         }
         // write PWM value

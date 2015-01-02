@@ -4,8 +4,8 @@ C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\Examples\Arduino_Ana
 C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\Examples\Arduino_AnalogRead\Arduino_AnalogRead\bin\Debug\Arduino.dll
 C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\Examples\Arduino_AnalogRead\Arduino_AnalogRead\bin\Debug\Arduino.pdb
 C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\Examples\Arduino_AnalogRead\Arduino_AnalogRead\obj\Debug\Arduino_AnalogRead.csprojResolveAssemblyReference.cache
-C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\Examples\Arduino_AnalogRead\Arduino_AnalogRead\obj\Debug\Arduino_AnalogRead.Form1.resources
 C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\Examples\Arduino_AnalogRead\Arduino_AnalogRead\obj\Debug\Arduino_AnalogRead.Properties.Resources.resources
 C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\Examples\Arduino_AnalogRead\Arduino_AnalogRead\obj\Debug\Arduino_AnalogRead.csproj.GenerateResource.Cache
 C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\Examples\Arduino_AnalogRead\Arduino_AnalogRead\obj\Debug\Arduino_AnalogRead.exe
 C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\Examples\Arduino_AnalogRead\Arduino_AnalogRead\obj\Debug\Arduino_AnalogRead.pdb
+C:\Users\Jonathan\Documents\Github\Arduino_Interface_CSharp\Examples\Arduino_AnalogRead\Arduino_AnalogRead\obj\Debug\Arduino_AnalogRead.AnalogReadForm.resources
