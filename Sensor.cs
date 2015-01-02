@@ -9,8 +9,8 @@ namespace ArduinoClass
 {
     public class Sensor // base class for all sensors
     {
-        private Arduino myArduino; // the arduino that is hooked up to the sensor
-        public int analogPin {get; private set;} // the analog pin number that the sensor is using
+        protected Arduino myArduino; // the arduino that is hooked up to the sensor
+        protected int analogPin;
         protected double bitCount = 10; // A/D resolution of the arduino
         protected double minVoltage = 0;
         protected double maxVoltage = 5;
@@ -23,11 +23,17 @@ namespace ArduinoClass
         }
         public double getSensorReading() // returns the voltage reading of the pin in analog form
         {
-            var val = (double) myArduino.AnalogRead(analogPin);
+            var val = myArduino.AnalogRead(analogPin);
             var voltage = val / (Math.Pow(2, bitCount) - 1.0) * (maxVoltage - minVoltage) + minVoltage;
             return voltage;
         }
- 
+
+        // computes the resistance of a sensor in a voltage divider circuit given 
+        public double getSensorResistance(double ConstResistanceValue) {
+            var val = myArduino.AnalogRead(analogPin);
+            var Resistance = (Math.Pow(2, bitCount) / val - 1) * ConstResistanceValue;
+            return Resistance;
+        }
 
     }
 }
