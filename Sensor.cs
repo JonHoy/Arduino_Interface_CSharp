@@ -31,8 +31,8 @@ namespace ArduinoClass
         // computes the resistance of a sensor in a voltage divider circuit given 
         public double getSensorResistance(double ConstResistanceValue) {
             var val = (double)myArduino.AnalogRead(analogPin);
-            var ratio = 1 - val / (Math.Pow(2, bitCount) - 1);
-            return ratio * ConstResistanceValue;
+            var Resistance = (Math.Pow(2, bitCount) / val - 1) * ConstResistanceValue;
+            return Resistance;
         }
 
     }
