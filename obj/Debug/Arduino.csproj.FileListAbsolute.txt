@@ -3,3 +3,7 @@ C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\bin\Debug\Arduino.pd
 C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\obj\Debug\Arduino.csprojResolveAssemblyReference.cache
 C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\obj\Debug\Arduino.dll
 C:\Users\Jonathan\Documents\GitHub\Arduino_Interface_CSharp\obj\Debug\Arduino.pdb
+D:\Documents\GitHub\Arduino_Interface_CSharp\bin\Debug\Arduino.dll
+D:\Documents\GitHub\Arduino_Interface_CSharp\bin\Debug\Arduino.pdb
+D:\Documents\GitHub\Arduino_Interface_CSharp\obj\Debug\Arduino.dll
+D:\Documents\GitHub\Arduino_Interface_CSharp\obj\Debug\Arduino.pdb
